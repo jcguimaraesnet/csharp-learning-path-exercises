@@ -4,10 +4,15 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        var nome = "Júlio";
-        var idade = 35;
-        var hobby = "Programar";
+        Console.WriteLine("Conversor de temperatura de celsius para fahrenheit");
+        Console.WriteLine("Informe a temperatura em celsius:");
+        if (!double.TryParse(Console.ReadLine(), out double celsius))
+        {
+            Console.WriteLine("Temperatura inválida. Programa encerrado.");
+            return;
+        }
 
-        Console.Write($"Nome: {nome}\nIdade: {idade}\nHobby: {hobby}");
+        var fahrenheit = (celsius * 9 / 5) + 32;
+        Console.WriteLine($"Temperatura em °C de {celsius:N2} equivale a temperatura {fahrenheit:N2} em °F.");
     }
 }
