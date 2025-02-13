@@ -1,4 +1,4 @@
-﻿namespace Path_1._1_Practical_3;
+﻿namespace Practical_3;
 
 internal class Program
 {

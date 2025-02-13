@@ -1,4 +1,4 @@
-﻿namespace Path_1._1_Classroom;
+﻿namespace Classroom;
 
 internal class Program
 {
