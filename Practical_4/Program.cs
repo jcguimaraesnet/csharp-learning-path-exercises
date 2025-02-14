@@ -4,15 +4,25 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Conversor de temperatura de celsius para fahrenheit");
-        Console.WriteLine("Informe a temperatura em celsius:");
-        if (!double.TryParse(Console.ReadLine(), out double celsius))
+        var notas = new float[4];
+        float somaNotas = 0;
+        float maiorNota = 0;
+        float menorNota = 0;
+        for (var i = 0; i < notas.Length; i++)
         {
-            Console.WriteLine("Temperatura inválida. Programa encerrado.");
-            return;
+            Console.WriteLine("Informe a nota escolar:");
+            if (!float.TryParse(Console.ReadLine(), out notas[i]))
+            {
+                Console.WriteLine("Nota inválida! Programa será encerrado.");
+                return;
+            }
+            somaNotas += notas[i];
+            if (notas[i] > maiorNota) maiorNota = notas[i];
+            if (i == 0) menorNota = notas[i];
+            if (notas[i] < menorNota) menorNota = notas[i];
         }
-
-        var fahrenheit = (celsius * 9 / 5) + 32;
-        Console.WriteLine($"Temperatura em °C de {celsius:N2} equivale a temperatura {fahrenheit:N2} em °F.");
+        Console.WriteLine($"Média: {somaNotas / notas.Length}");
+        Console.WriteLine($"Maior nota: {maiorNota}");
+        Console.WriteLine($"Menor nota: {menorNota}");
     }
 }

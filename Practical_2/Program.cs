@@ -1,43 +1,40 @@
 ﻿namespace Practical_2;
 
+public enum CaraCoroa
+{
+    Cara = 1,
+    Coroa
+}
+
 internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Calculo de IMC");
-        Console.WriteLine("Informe o peso (kg):");
-        if (!double.TryParse(Console.ReadLine(), out double peso))
+        Console.WriteLine("Jogo de cara ou coroa");
+        int opcaoCorreta;
+        int opcaoUsuario;
+        do
         {
-            Console.WriteLine("Peso inválido. Programa encerrado.");
-            return;
-        }
+            Console.Clear();
+            opcaoCorreta = Random.Shared.Next(1, 3);
+            Console.WriteLine("Escolha uma opção:");
+            Console.WriteLine("1 - Cara");
+            Console.WriteLine("2 - Coroa");
+            if (!int.TryParse(Console.ReadLine(), out opcaoUsuario) || opcaoUsuario < 1 || opcaoUsuario > 2)
+            {
+                Console.WriteLine("Opção inválida. Tente novamente.");
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+                continue;
+            }
+            if (opcaoUsuario != opcaoCorreta)
+            {
+                Console.WriteLine("Errou! Tente novamente.");
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+            }
+        } while (opcaoUsuario != opcaoCorreta);
 
-        Console.WriteLine("Informe a altura (m):");
-        if (!double.TryParse(Console.ReadLine(), out double altura))
-        {
-            Console.WriteLine("Altura inválida. Programa encerrado.");
-            return;
-        }
-
-        var imc = peso / Math.Pow(altura, 2);
-        string categoria;
-        switch (imc)
-        {
-            case <= 18.5:
-                categoria = "Abaixo do peso";
-                break;
-            case <= 24.9:
-                categoria = "Peso normal";
-                break;
-            case <= 29.9:
-                categoria = "Sobrepeso";
-                break;
-            default:
-                categoria = "Obesidade";
-                break;
-        }
-
-        Console.WriteLine($"Seu IMC é: {imc:F2}");
-        Console.WriteLine($"Sua categoria é: {categoria}");
+        Console.WriteLine($"Parabéns! Você acertou! A opção correta era {(CaraCoroa)opcaoCorreta}.");
     }
 }

@@ -4,59 +4,76 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hamburgueria - Cadastro de Funcionários");
-
-        Console.WriteLine("Informe o nome do funcionário:");
-        var nome = Console.ReadLine();
-        
-        Console.WriteLine("Informe o sobrenome do funcionário:");
-        var sobrenome = Console.ReadLine();
-
-        Console.WriteLine("Informe o salário do funcionário:");
-        if (!double.TryParse(Console.ReadLine(), out double salario))
+        //EXEMPLO 1
+        var horasExtras = new int[12];
+        int somaHorasExtras = 0;
+        for (var i = 0; i < horasExtras.Length; i++)
         {
-            Console.WriteLine("Salário inválido. Programa encerrado.");
-            return;
+            horasExtras[i] = Random.Shared.Next(1, 50);
+            Console.WriteLine(horasExtras[i]);
+            somaHorasExtras += horasExtras[i];
+        }
+        Console.WriteLine($"Soma das horas extras: {somaHorasExtras}");
+
+        //EXEMPLO 2
+        var nomeDosDiasDaSemana = new[] { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+        foreach (var nomeDia in nomeDosDiasDaSemana)
+        {
+            Console.WriteLine(nomeDia);
         }
 
-        Console.WriteLine("Informe a data de nascimento do funcionário:");
-        if (!DateOnly.TryParse(Console.ReadLine(), out DateOnly dataNascimento))
+        //EXEMPLO 3
+        Console.WriteLine("Informe um número aleatório:");
+        if (!int.TryParse(Console.ReadLine(), out var contagemRegressiva))
         {
-            Console.WriteLine("Data de nascimento inválido. Programa encerrado.");
-            return;
+            Console.WriteLine("Número inválido!");
+        }
+        while (contagemRegressiva > 0)
+        {
+            Console.WriteLine($"Número {contagemRegressiva--}");
+            Thread.Sleep(1000);
         }
 
-        string classeRenda;
-        switch (salario)
+        //EXEMPLO 4
+        var diaQueEuNasci = DiasDaSemana.Sexta;
+        Console.WriteLine($"Eu nasci no dia da semana: {(int)diaQueEuNasci}");
+        foreach (var dia in Enum.GetValues(typeof(DiasDaSemana)))
         {
-            case <= 1_500:
-                classeRenda = "E";
-                break;
-            case <= 5_000:
-                classeRenda = "D";
-                break;
-            case <= 10_000:
-                classeRenda = "C";
-                break;
-            case <= 20_000:
-                classeRenda = "B";
-                break;
-            default:
-                classeRenda = "A";
-                break;
+            Console.WriteLine($"Dia: {Convert.ToInt32(dia)}");
         }
 
-        Console.WriteLine($"Nome completo do funcionário é: {nome.ToUpper()} {sobrenome.ToUpper()}");
-        Console.WriteLine($"Salário do funcionário é: {salario:C}");
-        const int qtdeHorasMes = 160;
-        Console.WriteLine($"Valor hora do funcionário é: {(salario/qtdeHorasMes):C}");
-        Console.WriteLine($"Data de nascimento do funcionário é: {dataNascimento:dd/MM/yyyy}");
-
-        if (dataNascimento.AddYears(18) > DateOnly.FromDateTime(DateTime.Now))
+        //EXEMPLO 5
+        var opcaoMenu = 0;
+        var precoHamburguer = new[] { 12.50, 15.50 };
+        do
         {
-            Console.WriteLine("Funcionário é um menor aprendiz");
-        }
+            Console.Clear();
 
-        Console.WriteLine($"Classe de renda do funcionário é: {classeRenda}");
+            Console.WriteLine("Informe uma opção de menu: \n1 - beef burguer\n2 - Fish burguer \n3 - Sair");
+            if (!int.TryParse(Console.ReadLine(), out opcaoMenu) || (opcaoMenu < 1 || opcaoMenu > 2))
+            {
+                Console.WriteLine("Opção inválida!");
+                continue;
+            }
+
+            if (opcaoMenu == 3)
+            {
+                Console.WriteLine("Encerrando o programa...");
+                break;
+            }
+
+            Console.WriteLine("Informe a quantidade de hamburgueres desejado:");
+            if (!int.TryParse(Console.ReadLine(), out var quantidade))
+            {
+                Console.WriteLine("Quantidade inválida!");
+                continue;
+            }
+
+            var totalDoPedido = precoHamburguer[opcaoMenu - 1] * quantidade;
+            Console.WriteLine($"Total do pedido: {totalDoPedido:C}");
+            Console.WriteLine("Digite qualquer tecla para reiniciar...");
+            Console.ReadKey();
+
+        } while (true);
     }
 }
