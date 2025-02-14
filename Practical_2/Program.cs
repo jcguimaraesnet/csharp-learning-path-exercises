@@ -1,40 +1,32 @@
 ﻿namespace Practical_2;
 
-public enum CaraCoroa
-{
-    Cara = 1,
-    Coroa
-}
-
 internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Jogo de cara ou coroa");
-        int opcaoCorreta;
-        int opcaoUsuario;
-        do
-        {
-            Console.Clear();
-            opcaoCorreta = Random.Shared.Next(1, 3);
-            Console.WriteLine("Escolha uma opção:");
-            Console.WriteLine("1 - Cara");
-            Console.WriteLine("2 - Coroa");
-            if (!int.TryParse(Console.ReadLine(), out opcaoUsuario) || opcaoUsuario < 1 || opcaoUsuario > 2)
-            {
-                Console.WriteLine("Opção inválida. Tente novamente.");
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
-                continue;
-            }
-            if (opcaoUsuario != opcaoCorreta)
-            {
-                Console.WriteLine("Errou! Tente novamente.");
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
-                Console.ReadKey();
-            }
-        } while (opcaoUsuario != opcaoCorreta);
+        Console.WriteLine("Calculo de IMC");
 
-        Console.WriteLine($"Parabéns! Você acertou! A opção correta era {(CaraCoroa)opcaoCorreta}.");
+        Console.WriteLine("Informe o peso:");
+        if (!double.TryParse(Console.ReadLine(), out var peso))
+        {
+            Console.WriteLine("Peso inválido! Programa será encerrado.");
+            return;
+        }
+
+        Console.WriteLine("Informe a altura:");
+        if (!double.TryParse(Console.ReadLine(), out var altura))
+        {
+            Console.WriteLine("Altura inválida! Programa será encerrado.");
+            return;
+        }
+
+        IMC imc = new()
+        {
+            Peso = peso,
+            Altura = altura
+        };
+
+        Console.WriteLine($"IMC: {imc.CalcularIMC():N2}");
+        Console.WriteLine($"Situação: {imc.Situacao()}");
     }
 }

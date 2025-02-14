@@ -1,79 +1,35 @@
-﻿namespace Classroom;
+﻿using System.Drawing;
+
+namespace Classroom;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        //EXEMPLO 1
-        var horasExtras = new int[12];
-        int somaHorasExtras = 0;
-        for (var i = 0; i < horasExtras.Length; i++)
+        Colorful.Console.WriteAscii("HAMBURGUERIA", Color.FromArgb(244, 212, 255));
+
+        var funcionario = new Funcionario("João", "Silva", new DateOnly(2015, 1, 1), 50_000);
+        Console.WriteLine($"Nome completo: {funcionario.NomeCompleto()}");
+        Console.WriteLine($"Salário: {funcionario.Salario:C}");
+        Console.WriteLine($"Valor da hora extra: {funcionario.CalcularHoraExtra():C}");
+        Console.WriteLine($"Menor de idade: {funcionario.MenorIdade()}");
+        Console.WriteLine($"Classificação de renda: {funcionario.ClassificarRenda()}");
+
+        //exemplo de funcionario com try catch
+        try
         {
-            horasExtras[i] = Random.Shared.Next(1, 50);
-            Console.WriteLine(horasExtras[i]);
-            somaHorasExtras += horasExtras[i];
+            var funcionarioComSalarioInvalido = new Funcionario("Maria", "Santos", new DateOnly(2000, 1, 1), 0.00);
+            Console.WriteLine($"Nome completo: {funcionarioComSalarioInvalido.NomeCompleto()}");
+            Console.WriteLine($"Salário: {funcionarioComSalarioInvalido.Salario:C}");
+            Console.WriteLine($"Valor da hora extra: {funcionarioComSalarioInvalido.CalcularHoraExtra():C}");
+            Console.WriteLine($"Menor de idade: {funcionarioComSalarioInvalido.MenorIdade()}");
+            Console.WriteLine($"Classificação de renda: {funcionarioComSalarioInvalido.ClassificarRenda()}");
         }
-        Console.WriteLine($"Soma das horas extras: {somaHorasExtras}");
-
-        //EXEMPLO 2
-        var nomeDosDiasDaSemana = new[] { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
-        foreach (var nomeDia in nomeDosDiasDaSemana)
+        catch (ArgumentException ex)
         {
-            Console.WriteLine(nomeDia);
+            Console.WriteLine($"Erro na execução do programa. Erro ocorrido: {ex.Message}");
+            Console.WriteLine("Encerrando o programa...");
+            return;
         }
-
-        //EXEMPLO 3
-        Console.WriteLine("Informe um número aleatório:");
-        if (!int.TryParse(Console.ReadLine(), out var contagemRegressiva))
-        {
-            Console.WriteLine("Número inválido!");
-        }
-        while (contagemRegressiva > 0)
-        {
-            Console.WriteLine($"Número {contagemRegressiva--}");
-            Thread.Sleep(1000);
-        }
-
-        //EXEMPLO 4
-        var diaQueEuNasci = DiasDaSemana.Sexta;
-        Console.WriteLine($"Eu nasci no dia da semana: {(int)diaQueEuNasci}");
-        foreach (var dia in Enum.GetValues(typeof(DiasDaSemana)))
-        {
-            Console.WriteLine($"Dia: {Convert.ToInt32(dia)}");
-        }
-
-        //EXEMPLO 5
-        var opcaoMenu = 0;
-        var precoHamburguer = new[] { 12.50, 15.50 };
-        do
-        {
-            Console.Clear();
-
-            Console.WriteLine("Informe uma opção de menu: \n1 - beef burguer\n2 - Fish burguer \n3 - Sair");
-            if (!int.TryParse(Console.ReadLine(), out opcaoMenu) || (opcaoMenu < 1 || opcaoMenu > 2))
-            {
-                Console.WriteLine("Opção inválida!");
-                continue;
-            }
-
-            if (opcaoMenu == 3)
-            {
-                Console.WriteLine("Encerrando o programa...");
-                break;
-            }
-
-            Console.WriteLine("Informe a quantidade de hamburgueres desejado:");
-            if (!int.TryParse(Console.ReadLine(), out var quantidade))
-            {
-                Console.WriteLine("Quantidade inválida!");
-                continue;
-            }
-
-            var totalDoPedido = precoHamburguer[opcaoMenu - 1] * quantidade;
-            Console.WriteLine($"Total do pedido: {totalDoPedido:C}");
-            Console.WriteLine("Digite qualquer tecla para reiniciar...");
-            Console.ReadKey();
-
-        } while (true);
     }
 }
