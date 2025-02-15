@@ -2,28 +2,20 @@
 
 public class Pedido
 {
-    private int _quantidade;
-    public Pedido(string nome, double preco, int quantidade)
-    {
-        Nome = nome;
-        Preco = preco;
-        Quantidade = quantidade;
-    }
-    public string Nome { get; private set; }
-    public double Preco { get; private set; }
-    public int Quantidade
+    private readonly int _quantidade;
+    public required string Nome { get; init; }
+    public required double Preco { get; init; }
+    public required int Quantidade
     {
         get
         {
             return _quantidade;
         }
-        private set
+        init
         {
-            if (value <= 0)
-            {
-                throw new ArgumentException("Quantidade deve ser maior que zero.");
-            }
-            _quantidade = value;
+            _quantidade = value <= 0
+                ? throw new ArgumentException("Quantidade deve ser maior que zero.")
+                : value;
         }
     }
 

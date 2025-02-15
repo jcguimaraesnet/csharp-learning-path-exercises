@@ -2,55 +2,73 @@
 
 public class Funcionario
 {
-    public enum ClasseRenda
-    {
-        E = 1_500,
-        D = 5_000,
-        C = 10_000,
-        B = 20_000,
-        A = 20_001
-    }
+    private readonly string _primeiroNome;
+    private readonly string _sobrenome;
+    private readonly double _salario;
+    private DateOnly? _dataNascimento;
 
-    public Funcionario(string primeiroNome, string sobrenome, DateOnly dataNascimento, double salario)
-    {
-        PrimeiroNome = primeiroNome;
-        Sobrenome = sobrenome;
-        DataNascimento = dataNascimento;
-        Salario = salario;
-    }
-
-    private double _salario;
-
-    public string PrimeiroNome { get; private set; }
-    public string Sobrenome { get; private set; }
-    public DateOnly DataNascimento { get; private set; }
-    public double Salario
-    {
-        get { return _salario; }
-        set
+    public required string PrimeiroNome 
+    { 
+        get => _primeiroNome;
+        init
         {
-            if (value <= 0)
-                throw new ArgumentException("Salário deve ser maior que zero.");
-            _salario = value;
+            _primeiroNome = string.IsNullOrWhiteSpace(value) 
+                ? throw new ArgumentException("Nome não pode ser nulo ou vazio.") 
+                : value;
+        }
+    }
+    public required string Sobrenome
+    {
+        get => _sobrenome;
+        init
+        {
+            _sobrenome = string.IsNullOrWhiteSpace(value)
+                ? throw new ArgumentException("Sobrenome não pode ser nulo ou vazio.")
+                : value;
         }
     }
 
-    public string NomeCompleto()
+    
+    public DateOnly? DataNascimento 
+    { 
+        get => _dataNascimento;
+        set => _dataNascimento = value.HasValue && value.Value >= DateOnly.FromDateTime(DateTime.Now)
+            ? throw new ArgumentException("Data de nascimento não pode ser maior que a data atual.")
+            : value;
+    }
+    public required double Salario
     {
-        return $"{PrimeiroNome} {Sobrenome}".ToUpper();
+        get { return _salario; }
+        init
+        {
+            _salario = value <= 0
+                ? throw new ArgumentException("Salário deve ser maior que zero.")
+                : value;
+        }
     }
 
-    public double CalcularHoraExtra()
+    public string NomeCompleto() 
+        => $"{PrimeiroNome} {Sobrenome}".ToUpper();
+
+    public double CalcularHoraExtra(bool adicionalNoturno = false)
     {
         const int qtdeHorasMes = 160;
         const double fatorHoraExtra = 1.4;
-        return Salario / qtdeHorasMes * fatorHoraExtra;
+        double fatorAdicionalNoturno = adicionalNoturno ? 1.6 : 1.0;
+        return Salario / qtdeHorasMes * fatorHoraExtra * fatorAdicionalNoturno;
     }
 
+    //método com sobrecarga (overload)
+    //public double CalcularHoraExtra(bool adicionalNoturno)
+    //{
+    //    const int qtdeHorasMes = 160;
+    //    const double fatorHoraExtra = 1.4;
+    //    double fatorAdicionalNoturno = adicionalNoturno ? 1.6 : 1.0;
+    //    return Salario / qtdeHorasMes * fatorHoraExtra * fatorAdicionalNoturno;
+    //}
+
     public bool MenorIdade()
-    {
-        return DataNascimento.AddYears(18) > DateOnly.FromDateTime(DateTime.Now);
-    }
+        => DataNascimento?.AddYears(18) > DateOnly.FromDateTime(DateTime.Now);
 
     public ClasseRenda ClassificarRenda()
     {

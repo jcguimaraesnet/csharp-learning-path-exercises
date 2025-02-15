@@ -2,15 +2,13 @@
 
 internal class Aluno
 {
-    public string Nome { get; set; }
-    public double Nota1 { get; set; }
-    public double Nota2 { get; set; }
-    public double Nota3 { get; set; }
+    public required string Nome { get; init; }
+    public required double Nota1 { get; init; }
+    public required double Nota2 { get; init; }
+    public required double Nota3 { get; init; }
 
     public double CalcularMedia()
-    {
-        return (Nota1 + Nota2 + Nota3) / 3;
-    }
+        => (Nota1 + Nota2 + Nota3) / 3;
 
     public string Situacao()
     {

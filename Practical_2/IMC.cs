@@ -2,12 +2,11 @@
 
 internal class IMC
 {
-    public double Peso { get; set; }
-    public double Altura { get; set; }
-    public double CalcularIMC()
-    {
-        return Peso / (Altura * Altura);
-    }
+    public required double Peso { get; init; }
+    public required double Altura { get; init; }
+    
+    public double CalcularIMC() => Peso / (Altura * Altura);
+    
     public string Situacao()
     {
         switch (CalcularIMC())

@@ -7,7 +7,6 @@ internal class Program
         string[] produtos = ["Beef Burguer", "Fish Burguer"];
         double[] precos = [ 12.50, 15.00 ];
 
-
         Console.Clear();
         Console.WriteLine("Hamburgueria - Caixa registradora");
         Console.WriteLine("Escolha o hamburguer desejado:");
@@ -28,7 +27,12 @@ internal class Program
 
         try
         {
-            var pedido = new Pedido(produtos[opcao - 1], precos[opcao - 1], quantidade);
+            var pedido = new Pedido()
+            {
+                Nome = produtos[opcao - 1],
+                Preco = precos[opcao - 1],
+                Quantidade = quantidade
+            };
             Console.WriteLine($"Total do pedido: {pedido.CalcularTotalPedido():C}");
         }
         catch (ArgumentException ex)

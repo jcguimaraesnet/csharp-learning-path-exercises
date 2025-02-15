@@ -2,9 +2,7 @@
 
 public class Temperatura
 {
-    public double Celsius { get; set; }
+    public required double Celsius { get; init; }
     public double ConverterParaFahrenheit()
-    {
-        return Celsius * 1.8 + 32;
-    }
+        => Celsius * 1.8 + 32;
 }
