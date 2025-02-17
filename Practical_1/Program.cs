@@ -2,38 +2,65 @@
 
 internal class Program
 {
+    private static string[] produtos = ["Beef Burguer", "Fish Burguer"];
+    private static double[] precos = [12.50, 15.00];
+
     static void Main(string[] args)
     {
-        string[] produtos = ["Beef Burguer", "Fish Burguer"];
-        double[] precos = [ 12.50, 15.00 ];
+        List<Pedido> pedidos = new();
 
-        Console.Clear();
-        Console.WriteLine("Hamburgueria - Caixa registradora");
-        Console.WriteLine("Escolha o hamburguer desejado:");
-        Console.WriteLine($"1 - {produtos[0]} ({precos[0]:C})");
-        Console.WriteLine($"2 - {produtos[1]} ({precos[1]:C})");
-        if (!int.TryParse(Console.ReadLine(), out int opcao) || (opcao < 1 || opcao > 2))
+        int opcao;
+        do
         {
-            Console.WriteLine("Opção inválida. Programa encerrado.");
-            return;
-        }
+            Console.Clear();
+            Console.WriteLine("Hamburgueria - Caixa registradora");
+            Console.WriteLine("Escolha o hamburguer desejado:");
+            Console.WriteLine($"1 - {produtos[0]} ({precos[0]:C})");
+            Console.WriteLine($"2 - {produtos[1]} ({precos[1]:C})");
+            Console.WriteLine("3 - Calcular total do pedido");
+            Console.WriteLine("4 - Sair");
+            Console.WriteLine("Digite a opção desejada:");
 
-        Console.WriteLine("Informe a quantidade desejada:");
-        if (!int.TryParse(Console.ReadLine(), out int quantidade))
+            if (!int.TryParse(Console.ReadLine(), out opcao) || (opcao < 1 || opcao > 4))
+            {
+                Console.WriteLine("Opção inválida. Programa encerrado.");
+                return;
+            }
+
+            switch (opcao)
+            {
+                case 1:
+                    AdicionarPedido(pedidos, opcao);
+                    break;
+                case 2:
+                    AdicionarPedido(pedidos, opcao);
+                    break;
+                case 3:
+                    CalcularTotalPedido(pedidos);
+                    break;
+            }
+        } while (opcao != 4);
+
+
+        Console.WriteLine("Obrigado por utilizar nosso sistema de caixa!");
+    }
+
+    static void AdicionarPedido(List<Pedido> pedidos, int opcao)
+    {
+        Console.WriteLine("Informe a quantidade do produto:");
+        if (!int.TryParse(Console.ReadLine(), out var quantidade))
         {
-            Console.WriteLine("Quantidade inválida. Programa encerrado.");
-            return;
+            throw new OperationCanceledException("Quantidade inválida. Programa encerrado.");
         }
 
         try
         {
-            var pedido = new Pedido()
+            pedidos.Add(new Pedido()
             {
                 Nome = produtos[opcao - 1],
                 Preco = precos[opcao - 1],
                 Quantidade = quantidade
-            };
-            Console.WriteLine($"Total do pedido: {pedido.CalcularTotalPedido():C}");
+            });
         }
         catch (ArgumentException ex)
         {
@@ -41,6 +68,17 @@ internal class Program
             Console.WriteLine("Programa encerrado.");
         }
 
-        Console.WriteLine("Obrigado por utilizar nosso sistema de caixa!");
+        Console.WriteLine("Pedido adicionado com sucesso!");
+        Console.WriteLine("Digite qualquer tecla para continuar...");
+        Console.ReadKey();
+    }
+
+    static void CalcularTotalPedido(List<Pedido> pedidos)
+    {
+        double totalPedido = pedidos.Sum(pedido => pedido.CalcularTotalPedido());
+
+        Console.WriteLine($"Total do pedido: {totalPedido:C}");
+        Console.WriteLine("Digite qualquer tecla para continuar...");
+        Console.ReadKey();
     }
 }

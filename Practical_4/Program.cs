@@ -4,20 +4,16 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Conversão de temperatura de celsius para fahrenheit com POO");
+        List<int> numeros = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        var numeroImpares = numeros.Where(n => n % 2 != 0).ToList();
 
-        Console.WriteLine("Informe a temperatura em celsius:");
-        if (!double.TryParse(Console.ReadLine(), out var celsius))
-        {
-            Console.WriteLine("Temperatura inválida! Programa será encerrado.");
-            return;
-        }
+        //exemplo com foreach com expressão lambda
+        numeroImpares.ForEach(numeroImpares => Console.WriteLine(numeroImpares));
 
-        Temperatura temperatura = new()
-        {
-            Celsius = celsius
-        };
-
-        Console.WriteLine($"Temperatura em Fahrenheit: {temperatura.ConverterParaFahrenheit():N2}");
+        //exemplo com foreach tradicional
+        //foreach (var numero in numeroImpares)
+        //{
+        //    Console.WriteLine(numero);
+        //}
     }
 }

@@ -6,6 +6,7 @@ public class Funcionario
     private readonly string _sobrenome;
     private readonly double _salario;
     private DateOnly? _dataNascimento;
+    private readonly string _cpf;
 
     public required string PrimeiroNome 
     { 
@@ -36,6 +37,7 @@ public class Funcionario
             ? throw new ArgumentException("Data de nascimento não pode ser maior que a data atual.")
             : value;
     }
+
     public required double Salario
     {
         get { return _salario; }
@@ -45,6 +47,12 @@ public class Funcionario
                 ? throw new ArgumentException("Salário deve ser maior que zero.")
                 : value;
         }
+    }
+
+    public required string Cpf
+    {
+        get => _cpf;
+        init => _cpf = value;
     }
 
     public string NomeCompleto() 

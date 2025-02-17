@@ -4,41 +4,20 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Apurar notas de aluno");
+        const string IdentificadorCitrico = "Citrico";
+        const string IdentificadorNaoCitrico = "Não Citrico";
+        Dictionary<string, string> frutas = new();
+        List<string> frutasCitricas = ["Laranja", "Limão", "Tangerina"];
+        List<string> frutasNaoCitricas = ["Banana", "Maçã", "Pera"];
+        frutas.Add(frutasCitricas[0], IdentificadorCitrico);
+        frutas.Add(frutasCitricas[1], IdentificadorCitrico);
+        frutas.Add(frutasCitricas[2], IdentificadorCitrico);
+        frutas.Add(frutasNaoCitricas[0], IdentificadorNaoCitrico);
+        frutas.Add(frutasNaoCitricas[1], IdentificadorNaoCitrico);
+        frutas.Add(frutasNaoCitricas[2], IdentificadorNaoCitrico);
 
-        Console.WriteLine("Informe o nome do aluno:");
-        var nome = Console.ReadLine();
-
-        Console.WriteLine("Informe a primeira nota:");
-        if (!double.TryParse(Console.ReadLine(), out var nota1))
-        {
-            Console.WriteLine("Nota inválida! Programa será encerrado.");
-            return;
-        }
-
-        Console.WriteLine("Informe a segunda nota:");
-        if (!double.TryParse(Console.ReadLine(), out var nota2))
-        {
-            Console.WriteLine("Nota inválida! Programa será encerrado.");
-            return;
-        }
-
-        Console.WriteLine("Informe a terceira nota:");
-        if (!double.TryParse(Console.ReadLine(), out var nota3))
-        {
-            Console.WriteLine("Nota inválida! Programa será encerrado.");
-            return;
-        }
-
-        Aluno aluno = new()
-        {
-            Nome = nome,
-            Nota1 = nota1,
-            Nota2 = nota2,
-            Nota3 = nota3
-        };
-
-        Console.WriteLine($"Média: {aluno.CalcularMedia()}");
-        Console.WriteLine($"Situação: {aluno.Situacao()}");
+        frutas.Where(f => f.Value == IdentificadorCitrico)
+              .ToList()
+              .ForEach(f => Console.WriteLine(f.Key));
     }
 }

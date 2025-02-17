@@ -4,29 +4,9 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Calculo de IMC");
-
-        Console.WriteLine("Informe o peso:");
-        if (!double.TryParse(Console.ReadLine(), out var peso))
-        {
-            Console.WriteLine("Peso inválido! Programa será encerrado.");
-            return;
-        }
-
-        Console.WriteLine("Informe a altura:");
-        if (!double.TryParse(Console.ReadLine(), out var altura))
-        {
-            Console.WriteLine("Altura inválida! Programa será encerrado.");
-            return;
-        }
-
-        IMC imc = new()
-        {
-            Peso = peso,
-            Altura = altura
-        };
-
-        Console.WriteLine($"IMC: {imc.CalcularIMC():N2}");
-        Console.WriteLine($"Situação: {imc.Situacao()}");
+        List<string> frutas = ["Banana", "bergamota", "Maçã", "Pera", "Uva"];
+        frutas.Where(f => f.StartsWith("B", StringComparison.CurrentCultureIgnoreCase))
+              .ToList()
+              .ForEach(f => Console.WriteLine(f));
     }
 }
