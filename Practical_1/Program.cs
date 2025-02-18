@@ -2,83 +2,83 @@
 
 internal class Program
 {
-    private static string[] produtos = ["Beef Burguer", "Fish Burguer"];
-    private static double[] precos = [12.50, 15.00];
-
     static void Main(string[] args)
     {
-        List<Pedido> pedidos = new();
+        List<Funcionario> listaFuncionarios = new();
 
-        int opcao;
+        var opcao = 0;
         do
         {
             Console.Clear();
-            Console.WriteLine("Hamburgueria - Caixa registradora");
-            Console.WriteLine("Escolha o hamburguer desejado:");
-            Console.WriteLine($"1 - {produtos[0]} ({precos[0]:C})");
-            Console.WriteLine($"2 - {produtos[1]} ({precos[1]:C})");
-            Console.WriteLine("3 - Calcular total do pedido");
-            Console.WriteLine("4 - Sair");
-            Console.WriteLine("Digite a opção desejada:");
+            Console.WriteLine("1 - Cadastrar funcionário");
+            Console.WriteLine("2 - Aumentar Salário de todos os funcionários");
+            Console.WriteLine("3 - Sair");
 
-            if (!int.TryParse(Console.ReadLine(), out opcao) || (opcao < 1 || opcao > 4))
+            Console.WriteLine("Digite a opção desejada:");
+            if (!int.TryParse(Console.ReadLine(), out opcao) || opcao < 1 || opcao > 4)
             {
-                Console.WriteLine("Opção inválida. Programa encerrado.");
+                Console.WriteLine("Opção inválida. Encerrando programa...");
                 return;
             }
-
             switch (opcao)
             {
                 case 1:
-                    AdicionarPedido(pedidos, opcao);
-                    break;
+                    try
+                    {
+                        CadastrarFuncionario(listaFuncionarios);
+                        break;
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.WriteLine($"Erro na execução do programa. Erro ocorrido: {ex.Message}");
+                        Console.WriteLine("Encerrando o programa...");
+                        return;
+                    }
                 case 2:
-                    AdicionarPedido(pedidos, opcao);
+                    AumentarSalario(listaFuncionarios);
                     break;
                 case 3:
-                    CalcularTotalPedido(pedidos);
+                    Console.WriteLine("Saindo do cadastro. Encerrando programa...");
                     break;
             }
-        } while (opcao != 4);
+        } while (opcao != 3);
 
 
         Console.WriteLine("Obrigado por utilizar nosso sistema de caixa!");
     }
 
-    static void AdicionarPedido(List<Pedido> pedidos, int opcao)
+    private static void CadastrarFuncionario(List<Funcionario> listaFuncionarios)
     {
-        Console.WriteLine("Informe a quantidade do produto:");
-        if (!int.TryParse(Console.ReadLine(), out var quantidade))
+        Console.Clear();
+        Console.WriteLine("Informe o nome do funcionário:");
+        var nome = Console.ReadLine();
+        Console.WriteLine("Informe a opção de cargo do funcionário (0 - Caixa, 1 - Garcom, 2 - Gerente):");
+        if (!int.TryParse(Console.ReadLine(), out var opcaoCargo) || opcaoCargo < 0 || opcaoCargo > 2)
         {
-            throw new OperationCanceledException("Quantidade inválida. Programa encerrado.");
+            Console.WriteLine("Opção de cargo inválida. Encerrando programa...");
+            return;
         }
-
-        try
+        Console.WriteLine("Informe o salário do funcionário:");
+        if (!double.TryParse(Console.ReadLine(), out var salario))
         {
-            pedidos.Add(new Pedido()
-            {
-                Nome = produtos[opcao - 1],
-                Preco = precos[opcao - 1],
-                Quantidade = quantidade
-            });
+            Console.WriteLine("Salário inválido. Encerrando programa...");
+            return;
         }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine($"Ocorreu um erro inesperado na execução do programa. Erro ocorrido {ex.Message}.");
-            Console.WriteLine("Programa encerrado.");
-        }
-
-        Console.WriteLine("Pedido adicionado com sucesso!");
-        Console.WriteLine("Digite qualquer tecla para continuar...");
+        listaFuncionarios.Add(new Funcionario(nome, (Cargo)opcaoCargo, salario));
+        Console.WriteLine("Funcionário cadastrado com sucesso!");
+        Console.WriteLine("Digite qualquer tecla para reiniciar...");
         Console.ReadKey();
     }
 
-    static void CalcularTotalPedido(List<Pedido> pedidos)
+    private static void AumentarSalario(List<Funcionario> listaFuncionarios)
     {
-        double totalPedido = pedidos.Sum(pedido => pedido.CalcularTotalPedido());
+        listaFuncionarios.ForEach(f => { 
+            f.AumentarSalario();
+            Console.WriteLine($"Nome: {f.Nome} - Salário: {f.Salario:C}");
+        });
 
-        Console.WriteLine($"Total do pedido: {totalPedido:C}");
-        Console.WriteLine("Digite qualquer tecla para continuar...");
+        Console.WriteLine();
+        Console.WriteLine("Digite qualquer tecla para reiniciar...");
         Console.ReadKey();
     }
 }

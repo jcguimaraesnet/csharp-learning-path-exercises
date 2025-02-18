@@ -4,9 +4,9 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        List<string> frutas = ["Banana", "bergamota", "Maçã", "Pera", "Uva"];
-        frutas.Where(f => f.StartsWith("B", StringComparison.CurrentCultureIgnoreCase))
-              .ToList()
-              .ForEach(f => Console.WriteLine(f));
+        var cartao = new CartaoCredito();
+        cartao.AdicionarTransacao("Compra de celular", 1_000);
+        cartao.AdicionarTransacao("Compra de notebook", 2_000);
+        cartao.ConsultarFatura();
     }
 }
