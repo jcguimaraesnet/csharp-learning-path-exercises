@@ -8,12 +8,15 @@ internal class Program
     static void Main(string[] args)
     {
         Thread.CurrentThread.CurrentCulture = new CultureInfo("pt-BR");
-        Colorful.Console.WriteAscii("HAMBURGUERIA", Color.FromArgb(244, 212, 255));
+        Colorful.Console.WriteAscii("BIBLIOTECA", Color.FromArgb(244, 212, 255));
 
-        var conta = new ContaBancaria(500);
-        Console.WriteLine($"Saldo inicial: {conta.Saldo:C}");
-        conta.Depositar(500);
-        conta.Sacar(1200);
-        Console.WriteLine($"Saldo final: {conta.Saldo:C}");
+        var jornal = new Jornal("Folha de São Paulo", 2021, "Folha de São Paulo", new DateOnly(2021, 1, 5), "São Paulo");
+        var revista = new Revista("Superinteressante", 2021, "Abril", 1, "1234-5678");
+        var livro = new Livro("O Senhor dos Anéis", 1954, "Martins Fontes", "J.R.R. Tolkien", "978-0-395-19395-7");
+        
+        revista.ExibirDados();
+        livro.ExibirDados();
+        jornal.ExibirDados();
+
     }
 }

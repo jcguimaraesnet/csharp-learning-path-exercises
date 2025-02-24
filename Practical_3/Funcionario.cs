@@ -1,4 +1,4 @@
-﻿namespace Practical_1;
+﻿namespace Practical_3;
 
 public class Funcionario
 {
@@ -9,6 +9,7 @@ public class Funcionario
         _valorHora = valorHora;
     }
 
+    private const double _quantidadeHorasMensais = 160;
     private double _valorHora;
 
     public string Nome { get; private set; }
@@ -33,5 +34,9 @@ public class Funcionario
         Console.WriteLine($"Nome completo: {this.ObterNomeCompleto()}");
         Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
+        Console.WriteLine($"Salário base: {this.CalcularSalarioBase():C2}");
     }
+
+    protected double CalcularSalarioBase()
+        => ValorHora * _quantidadeHorasMensais;
 }
