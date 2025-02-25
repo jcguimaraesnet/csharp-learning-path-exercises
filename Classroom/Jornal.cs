@@ -12,9 +12,15 @@ internal class Jornal : Publicacao
     public DateOnly DataEdicao { get; set; }
     public string Cidade { get; set; }
 
-    public override void ExibirDados()
+    public void ExibirDados()
     {
-        base.ExibirDados();
+        this.ExibirDados(ConsoleColor.White);
+    }
+
+    public void ExibirDados(ConsoleColor consoleColor)
+    {
+        Console.ForegroundColor = consoleColor;
+        base.ExibirDadosBasicos();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS: ##");
         Console.WriteLine($"Data de Edição: {DataEdicao:dd/MM/yyyy}");
         Console.WriteLine($"Cidade: {Cidade}");

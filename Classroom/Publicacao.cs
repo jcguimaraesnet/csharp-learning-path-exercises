@@ -9,17 +9,16 @@ internal class Publicacao
         Editora = editora;
     }
 
-    public string Titulo { get; set; }
-    public int Ano { get; set; }
-    public string Editora { get; set; }
+    public string Titulo { get; private set; }
+    public int Ano { get; private set; }
+    public string Editora { get; private set; }
 
-    public virtual void ExibirDados()
+    protected void ExibirDadosBasicos()
     {
         Console.WriteLine();
         Console.WriteLine("## INFORMAÇÕES BÁSICAS: #####");
         Console.WriteLine($"Título: {Titulo}");
         Console.WriteLine($"Ano: {Ano}");
         Console.WriteLine($"Editora: {Editora}");
-        Console.WriteLine("#############################");
     }
 }

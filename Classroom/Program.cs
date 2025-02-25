@@ -14,9 +14,9 @@ internal class Program
         var revista = new Revista("Superinteressante", 2021, "Abril", 1, "1234-5678");
         var livro = new Livro("O Senhor dos Anéis", 1954, "Martins Fontes", "J.R.R. Tolkien", "978-0-395-19395-7");
         
-        revista.ExibirDados();
-        livro.ExibirDados();
-        jornal.ExibirDados();
+        revista.ExibirDados(ConsoleColor.DarkBlue);
+        livro.ExibirDados(ConsoleColor.Magenta);
+        jornal.ExibirDados(ConsoleColor.Red);
 
     }
 }
