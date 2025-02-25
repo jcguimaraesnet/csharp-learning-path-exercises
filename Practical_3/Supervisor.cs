@@ -19,11 +19,6 @@ internal class Supervisor : Funcionario
         };
     }
 
-    private double CalcularSalarioTotal()
-        => CalcularSalarioBase() + CalcularAdicionalNoturno();
-
-    public void ExibirSalarioTotal()
-        => Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
-
+    protected override double CalcularSalario()
+        => base.CalcularSalario() + CalcularAdicionalNoturno();
 }
-

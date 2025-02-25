@@ -26,7 +26,7 @@ public class Funcionario
 
     private string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
 
-    public void ExibirDados()
+    public virtual void ExibirDados()
     {
         Console.WriteLine();
         Console.WriteLine("## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##");

@@ -27,16 +27,16 @@ public class Funcionario
 
     private string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
 
-    public void ExibirDados()
+    public virtual void ExibirDados()
     {
         Console.WriteLine();
         Console.WriteLine("## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##");
         Console.WriteLine($"Nome completo: {this.ObterNomeCompleto()}");
         Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
-        Console.WriteLine($"Salário base: {this.CalcularSalarioBase():C2}");
+        Console.WriteLine($"Salário: {this.CalcularSalario():C2}");
     }
 
-    protected double CalcularSalarioBase()
+    protected virtual double CalcularSalario()
         => ValorHora * _quantidadeHorasMensais;
 }

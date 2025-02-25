@@ -13,9 +13,6 @@ internal class Caixa : Funcionario
     private double CalcularBonus()
         => ValorFaturamentoMesAnterior * 0.01;
 
-    private double CalcularSalarioTotal()
-        => CalcularSalarioBase() + CalcularBonus();
-
-    public void ExibirSalarioTotal()
-        => Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
+    protected override double CalcularSalario()
+        => base.CalcularSalario() + CalcularBonus();
 }
