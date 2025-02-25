@@ -20,4 +20,14 @@ internal class Jornal : Publicacao
         Console.WriteLine($"Cidade: {Cidade}");
         Console.WriteLine("#############################");
     }
+
+    public override string ToString()
+    {
+        return base.ToString() +
+            "## INFORMAÇÕES ADICIONAIS: ##\n" +
+            $"Data de Edição: {DataEdicao:dd/MM/yyyy}\n" +
+            $"Cidade: {Cidade}\n" +
+            "#############################\n";
+
+    }
 }

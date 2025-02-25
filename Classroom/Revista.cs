@@ -20,4 +20,13 @@ internal class Revista : Publicacao
         Console.WriteLine($"ISSN: {ISSN}");
         Console.WriteLine("#############################");
     }
+
+    public override string ToString()
+    {
+        return base.ToString() +
+            "## INFORMAÇÕES ADICIONAIS: ##\n" +
+            $"Número da Edição: {NumeroEdicao}\n" +
+            $"ISSN: {ISSN}\n" +
+            "#############################\n";
+    }
 }

@@ -20,4 +20,13 @@ internal class Livro : Publicacao
         Console.WriteLine($"ISBN: {ISBN}");
         Console.WriteLine("#############################");
     }
+
+    public override string ToString()
+    {
+        return base.ToString() +
+            "## INFORMAÇÕES ADICIONAIS: ##\n" +
+            $"Autor: {Autor} \n" +
+            $"ISBN: {ISBN} \n" +
+            "#############################\n";
+    }
 }
