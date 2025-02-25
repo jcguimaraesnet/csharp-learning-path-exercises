@@ -10,12 +10,16 @@ internal class Caixa : Funcionario
     
     public int ValorFaturamentoMesAnterior { get; private set; }
 
+    public void ExibirDados()
+    {
+        base.ExibirDadosBasicos();
+        Console.WriteLine($"Valor Faturamento Mês Anterior: {ValorFaturamentoMesAnterior}");
+        Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
+    }
+
     private double CalcularBonus()
         => ValorFaturamentoMesAnterior * 0.01;
 
     private double CalcularSalarioTotal()
         => CalcularSalarioBase() + CalcularBonus();
-
-    public void ExibirSalarioTotal()
-        => Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
 }

@@ -8,4 +8,10 @@ internal class Caixa : Funcionario
         ValorFaturamentoMesAnterior = valorFaturamentoMesAnterior;
     }
     public int ValorFaturamentoMesAnterior { get; private set; }
+
+    public void ExibirDados()
+    {
+        base.ExibirDadosBasicos();
+        Console.WriteLine($"Valor Faturamento Mês Anterior: {ValorFaturamentoMesAnterior}");
+    }
 }

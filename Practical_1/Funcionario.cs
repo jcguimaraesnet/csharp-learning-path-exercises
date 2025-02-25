@@ -26,12 +26,11 @@ public class Funcionario
 
     private string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
 
-    public void ExibirDados()
+    protected void ExibirDadosBasicos()
     {
         Console.WriteLine();
         Console.WriteLine("## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##");
         Console.WriteLine($"Nome completo: {this.ObterNomeCompleto()}");
-        Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
     }
 }

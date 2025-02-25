@@ -9,4 +9,10 @@ internal class Supervisor : Funcionario
     }
 
     public Turno Turno { get; private set; }
+
+    public void ExibirDados()
+    {
+        base.ExibirDadosBasicos();
+        Console.WriteLine($"Turno: {Turno}");
+    }
 }

@@ -10,7 +10,14 @@ internal class Supervisor : Funcionario
 
     public Turno Turno { get; private set; }
 
-    public double CalcularAdicionalNoturno()
+    public void ExibirDados()
+    {
+        base.ExibirDadosBasicos();
+        Console.WriteLine($"Turno: {Turno}");
+        Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
+    }
+
+    private double CalcularAdicionalNoturno()
     {
         return Turno switch
         {
@@ -21,9 +28,4 @@ internal class Supervisor : Funcionario
 
     private double CalcularSalarioTotal()
         => CalcularSalarioBase() + CalcularAdicionalNoturno();
-
-    public void ExibirSalarioTotal()
-        => Console.WriteLine($"Salário total: {CalcularSalarioTotal():C}");
-
 }
-

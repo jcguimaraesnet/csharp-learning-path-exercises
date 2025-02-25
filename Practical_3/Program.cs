@@ -9,12 +9,7 @@ internal class Program
         var func3 = new Caixa("José", "da Silva", 3_000, 1);
 
         func1.ExibirDados();
-        func1.ExibirSalarioTotal();
-        
         func2.ExibirDados();
-        func2.ExibirSalarioTotal();
-        
         func3.ExibirDados();
-        func3.ExibirSalarioTotal();
     }
 }
