@@ -10,9 +10,16 @@ internal class Garcon : Funcionario
 
     public List<int> Mesas { get; private set; }
 
-    public double CalcularComissao()
-        => base.CalcularSalario() * Mesas.Count / 100;
+    public override void ExibirDadosAdicionais()
+    {
+        Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
+        Console.WriteLine($"Mesas: {string.Join(", ", Mesas)}");
+    }
 
-    protected override double CalcularSalario()
-    => base.CalcularSalario() + CalcularComissao();
+    private double CalcularComissao()
+        => base.CalcularSalarioBase() * Mesas.Count / 100;
+
+    protected override double CalcularSalarioAdicional()
+        => CalcularComissao();
+
 }

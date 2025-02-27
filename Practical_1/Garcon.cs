@@ -1,4 +1,6 @@
-﻿namespace Practical_1;
+﻿using System.Linq;
+
+namespace Practical_1;
 
 internal class Garcon : Funcionario
 {
@@ -10,9 +12,10 @@ internal class Garcon : Funcionario
 
     public List<int> Mesas { get; private set; }
 
-    public override void ExibirDados()
+    public override void ExibirDadosAdicionais()
     {
         base.ExibirDados();
+        Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
         Console.WriteLine($"Mesas: {string.Join(", ", Mesas)}");
     }
 }

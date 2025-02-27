@@ -10,9 +10,10 @@ internal class Garcon : Funcionario
 
     public List<int> Mesas { get; private set; }
 
-    public override void ExibirDados()
+    public override void ExibirDadosAdicionais()
     {
         base.ExibirDados();
+        Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
         Console.WriteLine($"Mesas: {string.Join(", ", Mesas)}");
     }
 }

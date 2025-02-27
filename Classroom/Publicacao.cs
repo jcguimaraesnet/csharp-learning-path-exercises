@@ -1,6 +1,6 @@
 ﻿namespace Classroom;
 
-internal class Publicacao
+internal abstract class Publicacao
 {
     public Publicacao(string titulo, int ano, string editora)
     {
@@ -13,17 +13,14 @@ internal class Publicacao
     public int Ano { get; private set; }
     public string Editora { get; private set; }
 
-    public virtual void ExibirDados()
+    public void ExibirDados()
     {
         Console.WriteLine("## INFORMAÇÕES BÁSICAS: #####");
         Console.WriteLine($"Título: {Titulo}");
         Console.WriteLine($"Ano: {Ano}");
         Console.WriteLine($"Editora: {Editora}");
+        ExibirDadosAdicionais();
     }
 
-    public override string ToString()
-        => $"## INFORMAÇÕES BÁSICAS: #####\n" +
-            "Título: {Titulo}\n" +
-            "Ano: {Ano}\n" +
-            "Editora: {Editora}\n";
+    public abstract void ExibirDadosAdicionais();
 }

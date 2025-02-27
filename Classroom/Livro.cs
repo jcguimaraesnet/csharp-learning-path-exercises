@@ -12,21 +12,12 @@ internal class Livro : Publicacao
     public string Autor { get; set; }
     public string ISBN { get; set; }
 
-    public override void ExibirDados()
+    public override void ExibirDadosAdicionais()
     {
         base.ExibirDados();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS: ##");
         Console.WriteLine($"Autor: {Autor}");
         Console.WriteLine($"ISBN: {ISBN}");
         Console.WriteLine("#############################");
-    }
-
-    public override string ToString()
-    {
-        return base.ToString() +
-            "## INFORMAÇÕES ADICIONAIS: ##\n" +
-            $"Autor: {Autor} \n" +
-            $"ISBN: {ISBN} \n" +
-            "#############################\n";
     }
 }

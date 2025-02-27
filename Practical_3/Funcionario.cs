@@ -1,6 +1,6 @@
 ﻿namespace Practical_3;
 
-public class Funcionario
+public abstract class Funcionario
 {
     public Funcionario(string nome, string sobrenome, double valorHora)
     {
@@ -27,16 +27,26 @@ public class Funcionario
 
     private string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
 
-    public virtual void ExibirDados()
+    public void ExibirDados()
     {
         Console.WriteLine();
         Console.WriteLine("## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##");
         Console.WriteLine($"Nome completo: {this.ObterNomeCompleto()}");
         Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
-        Console.WriteLine($"Salário: {this.CalcularSalario():C2}");
+        Console.WriteLine($"Salário Base: {CalcularSalarioBase():C2}");
+        Console.WriteLine($"Salário Adicional: {CalcularSalarioAdicional():C2}");
+        Console.WriteLine($"Salário Total: {CalcularSalarioTotal():C2}");
+        ExibirDadosAdicionais();
     }
 
-    protected virtual double CalcularSalario()
+    public abstract void ExibirDadosAdicionais();
+
+    protected double CalcularSalarioBase()
         => ValorHora * _quantidadeHorasMensais;
+
+    protected abstract double CalcularSalarioAdicional();
+
+    public double CalcularSalarioTotal()
+        => CalcularSalarioBase() + CalcularSalarioAdicional();
 }

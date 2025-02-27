@@ -12,21 +12,11 @@ internal class Revista : Publicacao
     public int NumeroEdicao { get; set; }
     public string ISSN { get; set; }
 
-    public override void ExibirDados()
+    public override void ExibirDadosAdicionais()
     {
-        base.ExibirDados();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS: ##");
         Console.WriteLine($"Número da Edição: {NumeroEdicao}");
         Console.WriteLine($"ISSN: {ISSN}");
         Console.WriteLine("#############################");
-    }
-
-    public override string ToString()
-    {
-        return base.ToString() +
-            "## INFORMAÇÕES ADICIONAIS: ##\n" +
-            $"Número da Edição: {NumeroEdicao}\n" +
-            $"ISSN: {ISSN}\n" +
-            "#############################\n";
     }
 }

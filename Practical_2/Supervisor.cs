@@ -10,9 +10,10 @@ internal class Supervisor : Funcionario
 
     public Turno Turno { get; private set; }
 
-    public override void ExibirDados()
+    public override void ExibirDadosAdicionais()
     {
         base.ExibirDados();
-        Console.WriteLine($"Turno: {Turno}");
+        Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
+        Console.WriteLine($"Turno: {string.Join(", ", Turno)}");
     }
 }
