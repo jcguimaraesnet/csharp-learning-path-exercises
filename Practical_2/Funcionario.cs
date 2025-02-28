@@ -17,7 +17,7 @@ public abstract class Funcionario
     public double ValorHora
     {
         get { return _valorHora; }
-        private set
+        protected set
         {
             _valorHora = value <= 0
                 ? throw new ArgumentException("Valor hora deve ser maior que zero.")

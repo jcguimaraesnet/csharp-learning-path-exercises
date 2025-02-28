@@ -17,7 +17,7 @@ public abstract class Funcionario
     public double ValorHora
     {
         get { return _valorHora; }
-        private set
+        protected set
         {
             _valorHora = value <= 0
                 ? throw new ArgumentException("Valor hora deve ser maior que zero.")
@@ -35,18 +35,11 @@ public abstract class Funcionario
         Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
         Console.WriteLine($"Salário Base: {CalcularSalarioBase():C2}");
-        Console.WriteLine($"Salário Adicional: {CalcularSalarioAdicional():C2}");
-        Console.WriteLine($"Salário Total: {CalcularSalarioTotal():C2}");
         ExibirDadosAdicionais();
     }
 
     public abstract void ExibirDadosAdicionais();
 
-    protected double CalcularSalarioBase()
+    public double CalcularSalarioBase()
         => ValorHora * _quantidadeHorasMensais;
-
-    protected abstract double CalcularSalarioAdicional();
-
-    public double CalcularSalarioTotal()
-        => CalcularSalarioBase() + CalcularSalarioAdicional();
 }

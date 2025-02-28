@@ -1,6 +1,6 @@
 ﻿namespace Practical_2;
 
-internal class Supervisor : Funcionario
+internal class Supervisor : Funcionario, IDissidioElegivel
 {
     public Supervisor(string nome, string sobrenome, double valorHora, Turno turno)
         : base(nome, sobrenome, valorHora)
@@ -16,4 +16,7 @@ internal class Supervisor : Funcionario
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
         Console.WriteLine($"Turno: {string.Join(", ", Turno)}");
     }
+
+    public void AdicionarDissidio()
+        => ValorHora *= 1.10;
 }

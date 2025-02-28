@@ -20,7 +20,16 @@ internal class Program
 
         foreach (var funcionario in colecaoFuncionarios)
         {
-            funcionario.ExibirDados();
+            Console.WriteLine("## DADOS DO FUNCIONÁRIO ##");
+            Console.WriteLine($"## Nome Completo: {funcionario.Nome}");
+            Console.WriteLine($"## Tipo: {funcionario.GetType().Name}");
+            Console.WriteLine($"## Salário base: {funcionario.CalcularSalarioBase():C2}");
+            if (funcionario is IDissidioElegivel dissidioElegivel)
+            {
+                dissidioElegivel.AdicionarDissidio();
+                Console.WriteLine($"## Salário com dissídio: {funcionario.CalcularSalarioBase():C2}");
+            }
+            Console.WriteLine();
         }
     }
 }

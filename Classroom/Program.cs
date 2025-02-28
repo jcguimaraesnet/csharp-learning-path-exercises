@@ -28,8 +28,15 @@ internal class Program
 
         foreach (var publicacao in colecaoPublicacoes)
         {
-            //Console.WriteLine(publicacao.ExibirDados());
-            Console.WriteLine(publicacao);
+            publicacao.ExibirDados();
+        }
+
+        Console.WriteLine("## PUBLICAÇÕES EMPRESTÁVEIS: ##");
+        var publicacoesEmprestaveis = colecaoPublicacoes.OfType<IEmprestavel>();
+        foreach (var pubEmprestavel in publicacoesEmprestaveis)
+        {
+            var pub = (Publicacao)pubEmprestavel;
+            pub.ExibirDados();
         }
     }
 }

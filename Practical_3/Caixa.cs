@@ -1,6 +1,6 @@
 ﻿namespace Practical_3;
 
-internal class Caixa : Funcionario
+internal class Caixa : Funcionario, IDissidioElegivel
 {
     public Caixa(string nome, string sobrenome, double valorHora, double valorFaturamentoMesAnterior)
         : base(nome, sobrenome, valorHora)
@@ -16,9 +16,6 @@ internal class Caixa : Funcionario
         Console.WriteLine($"Valor faturamento anterior: {ValorFaturamentoMesAnterior:N2}");
     }
 
-    private double CalcularBonus()
-        => ValorFaturamentoMesAnterior * 0.01;
-
-    protected override double CalcularSalarioAdicional()
-        => CalcularBonus();
+    public void AdicionarDissidio()
+    => ValorHora *= 1.10;
 }

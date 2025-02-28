@@ -1,6 +1,6 @@
 ﻿namespace Classroom;
 
-internal class Revista : Publicacao
+internal class Revista : Publicacao, IEmprestavel
 {
     public Revista(string titulo, int ano, string editora, int numeroEdicao, string issn)
         : base(titulo, ano, editora)
@@ -19,4 +19,15 @@ internal class Revista : Publicacao
         Console.WriteLine($"ISSN: {ISSN}");
         Console.WriteLine("#############################");
     }
+
+    private bool _status;
+
+    public void Devolver()
+        => _status = true;
+
+    public void Emprestar()
+        => _status = false;
+
+    public bool EstahDisponivel()
+        => _status;
 }
