@@ -1,6 +1,6 @@
 ﻿namespace Classroom;
 
-internal class Livro : Publicacao, IEmprestavel
+internal class Livro : Publicacao
 {
     public Livro(string titulo, int ano, string editora, string autor, string isbn) 
         : base(titulo, ano, editora)
@@ -14,21 +14,8 @@ internal class Livro : Publicacao, IEmprestavel
 
     public override void ExibirDadosAdicionais()
     {
-        base.ExibirDados();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS: ##");
         Console.WriteLine($"Autor: {Autor}");
         Console.WriteLine($"ISBN: {ISBN}");
-        Console.WriteLine("#############################");
     }
-
-    private bool _status;
-
-    public void Devolver()
-        => _status = true;
-
-    public void Emprestar()
-        => _status = false;
-
-    public bool EstahDisponivel()
-        => _status;
 }

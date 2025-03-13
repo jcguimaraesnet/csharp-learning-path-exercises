@@ -20,7 +20,20 @@ internal abstract class Publicacao
         Console.WriteLine($"Ano: {Ano}");
         Console.WriteLine($"Editora: {Editora}");
         ExibirDadosAdicionais();
+        Console.WriteLine("## SEÇÕES: #####");
+        foreach (var secao in _secoes)
+        {
+            Console.WriteLine(secao.ToString());
+        }
+        Console.WriteLine("#############################\n");
     }
 
     public abstract void ExibirDadosAdicionais();
+
+    private IList<Secao> _secoes = new List<Secao>();
+
+    public void AdicionarSecao(string titulo, string resumo)
+    {
+        _secoes.Add(new Secao(titulo, resumo));
+    }
 }
