@@ -29,15 +29,20 @@ public abstract class Funcionario
 
     public void ExibirDados()
     {
-        Console.WriteLine();
-        Console.WriteLine("## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##");
-        Console.WriteLine($"Nome completo: {this.ObterNomeCompleto()}");
-        Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
-        Console.WriteLine($"Valor hora: {ValorHora:C2}");
-        Console.WriteLine($"Salário Base: {CalcularSalarioBase():C2}");
-        Console.WriteLine($"Auxilio dependente: {CalcularAuxilioDependentes():C2}");
-        Console.WriteLine($"Salário total: {CalcularSalarioTotal():C2}");
+        Console.WriteLine(ToString());
         ExibirDadosAdicionais();
+    }
+
+    public override string ToString()
+    {
+        string result = "## INFORMAÇÕES BÁSICAS DE FUNCIONÁRIO: ##\n";
+        result += $"Nome completo: {this.ObterNomeCompleto()}\n";
+        result += $"Tipo de funcionário: {this.GetType().Name}\n";
+        result += $"Valor hora: {ValorHora:C2}\n";
+        result += $"Salário Base: {CalcularSalarioBase():C2}\n";
+        result += $"Auxilio dependente: {CalcularAuxilioDependentes():C2}\n";
+        result += $"Salário total: {CalcularSalarioTotal():C2}\n";
+        return result;
     }
 
     public abstract void ExibirDadosAdicionais();

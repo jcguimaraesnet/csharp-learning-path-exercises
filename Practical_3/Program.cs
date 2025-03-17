@@ -18,22 +18,7 @@ internal class Program
         hamburgueria.AdicionarFuncionario(supervisor);
         hamburgueria.AdicionarFuncionario(caixa);
 
-        Console.WriteLine("\n\n## LISTA DE GARÇONS ##");
-        foreach (var funcionario in hamburgueria.ListarGarcons())
-        {
-            funcionario.ExibirDados();
-        }
-
-        Console.WriteLine("\n\n## LISTA DE SUPERVISORES ##");
-        foreach (var funcionario in hamburgueria.ListarSupervisores())
-        {
-            funcionario.ExibirDados();
-        }
-
-        Console.WriteLine("\n\n## LISTA DE CAIXAS ##");
-        foreach (var funcionario in hamburgueria.ListarCaixas())
-        {
-            funcionario.ExibirDados();
-        }
+        hamburgueria.GerarRelatorio();
+        hamburgueria.ExibirRelatorio();
     }
 }

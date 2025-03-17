@@ -13,19 +13,25 @@ internal abstract class Publicacao
     public int Ano { get; private set; }
     public string Editora { get; private set; }
 
-    public void ExibirDados()
+    public override string ToString()
     {
-        Console.WriteLine("## INFORMAÇÕES BÁSICAS: #####");
-        Console.WriteLine($"Título: {Titulo}");
-        Console.WriteLine($"Ano: {Ano}");
-        Console.WriteLine($"Editora: {Editora}");
-        ExibirDadosAdicionais();
-        Console.WriteLine("## SEÇÕES: #####");
+        var result = "## INFORMAÇÕES BÁSICAS: #####\n";
+        result += $"Título: {Titulo}\n";
+        result += $"Ano: {Ano}\n";
+        result += $"Editora: {Editora}\n";
+        result += "## SEÇÕES: #####\n";
         foreach (var secao in _secoes)
         {
-            Console.WriteLine(secao.ToString());
+            result += secao.ToString() + "\n";
         }
-        Console.WriteLine("#############################\n");
+        result += "#############################\n\n";
+        return result;
+    }
+
+    public void ExibirDados()
+    {
+        Console.WriteLine(ToString());
+        ExibirDadosAdicionais();
     }
 
     public abstract void ExibirDadosAdicionais();

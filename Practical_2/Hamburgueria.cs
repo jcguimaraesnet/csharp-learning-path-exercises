@@ -1,4 +1,4 @@
-﻿namespace Practical_3;
+﻿namespace Practical_2;
 
 public class Hamburgueria
 {
@@ -10,7 +10,7 @@ public class Hamburgueria
 
     public string Nome { get; private set; }
     public string Endereco { get; private set; }
-    
+
     private List<Funcionario> _funcionarios = new List<Funcionario>();
     public void AdicionarFuncionario(Funcionario funcionario)
     {
@@ -26,34 +26,16 @@ public class Hamburgueria
     public IList<Funcionario> ListarCaixas()
         => _funcionarios.Where(f => f is Caixa).ToList();
 
-    private string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
-
     public void GerarRelatorio()
     {
+        string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
+        
         if (File.Exists(file))
             File.Delete(file);
-
+        
         using (StreamWriter sw = File.CreateText(file))
         {
             _funcionarios.ToList().ForEach(func => sw.WriteLine(func.ToString()));
-        }
-    }
-
-    public void ExibirRelatorio()
-    {
-        if (!File.Exists(file))
-        {
-            Console.WriteLine("Relatório não encontrado.");
-            return;
-        }
-
-        using (StreamReader sr = File.OpenText(file))
-        {
-            string s = "";
-            while ((s = sr.ReadLine()) != null)
-            {
-                Console.WriteLine(s);
-            }
         }
     }
 }

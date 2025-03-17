@@ -25,9 +25,7 @@ internal class Program
         biblioteca.AdicionarPublicacao(revista);
         biblioteca.AdicionarPublicacao(livro);
 
-        foreach (var publicacao in biblioteca.ListarLivros())
-        {
-            publicacao.ExibirDados();
-        }
+        biblioteca.GerarRelatorio();
+        biblioteca.ExibirRelatorio();
     }
 }

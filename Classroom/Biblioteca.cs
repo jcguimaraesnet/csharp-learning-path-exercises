@@ -32,4 +32,35 @@ internal class Biblioteca
     {
         return publicacaos.Where(p => p is Jornal).ToList();
     }
+
+    private string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
+
+    public void GerarRelatorio()
+    {
+        if (File.Exists(file))
+            File.Delete(file);
+
+        using (StreamWriter sw = File.CreateText(file))
+        {
+            publicacaos.ToList().ForEach(pub => sw.WriteLine(pub.ToString()));
+        }
+    }
+
+    public void ExibirRelatorio()
+    {
+        if (!File.Exists(file))
+        {
+            Console.WriteLine("Relatório não encontrado.");
+            return;
+        }
+        using (StreamReader sr = File.OpenText(file))
+        {
+            string s = "";
+            while ((s = sr.ReadLine()) != null)
+            {
+                Console.WriteLine(s);
+            }
+        }
+    }
+
 }
