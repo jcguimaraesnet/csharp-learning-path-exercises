@@ -11,7 +11,6 @@ internal class Caixa : Funcionario
 
     public override void ExibirDadosAdicionais()
     {
-        base.ExibirDados();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
         Console.WriteLine($"Valor faturamento anterior: {ValorFaturamentoMesAnterior:N2}");
     }

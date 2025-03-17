@@ -12,7 +12,6 @@ internal class Supervisor : Funcionario, IDissidioElegivel
 
     public override void ExibirDadosAdicionais()
     {
-        base.ExibirDados();
         Console.WriteLine("## INFORMAÇÕES ADICIONAIS ##");
         Console.WriteLine($"Turno: {string.Join(", ", Turno)}");
     }

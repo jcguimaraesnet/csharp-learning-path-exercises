@@ -35,6 +35,8 @@ public abstract class Funcionario
         Console.WriteLine($"Tipo de funcionário: {this.GetType().Name}");
         Console.WriteLine($"Valor hora: {ValorHora:C2}");
         Console.WriteLine($"Salário Base: {CalcularSalarioBase():C2}");
+        Console.WriteLine($"Auxilio dependente: {CalcularAuxilioDependentes():C2}");
+        Console.WriteLine($"Salário total: {CalcularSalarioTotal():C2}");
         ExibirDadosAdicionais();
     }
 
@@ -42,4 +44,21 @@ public abstract class Funcionario
 
     protected double CalcularSalarioBase()
         => ValorHora * _quantidadeHorasMensais;
+
+    private IList<Dependente> _dependentes = new List<Dependente>();
+
+    public void AdicionarDependente(string nome, DateOnly dataNascimento)
+    {
+        var dependente = new Dependente(nome, dataNascimento);
+        _dependentes.Add(dependente);
+    }
+
+    private double CalcularAuxilioDependentes()
+    {
+        const double valorAuxilioPorDependente = 500;
+        return valorAuxilioPorDependente * _dependentes.Count;
+    }
+
+    private double CalcularSalarioTotal()
+        => CalcularSalarioBase() + CalcularAuxilioDependentes();
 }
