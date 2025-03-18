@@ -2,6 +2,11 @@
 
 internal class Caixa : Funcionario, IDissidioElegivel
 {
+    public Caixa(string nome, string sobrenome, double valorHora)
+        : base(nome, sobrenome, valorHora)
+    {
+    }
+
     public Caixa(string nome, string sobrenome, double valorHora, double valorFaturamentoMesAnterior)
         : base(nome, sobrenome, valorHora)
     {

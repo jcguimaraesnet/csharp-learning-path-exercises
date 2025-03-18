@@ -18,7 +18,14 @@ internal class Program
         hamburgueria.AdicionarFuncionario(supervisor);
         hamburgueria.AdicionarFuncionario(caixa);
 
-        hamburgueria.GerarRelatorio();
-        hamburgueria.ExibirRelatorio();
+        hamburgueria.ExportarDados();
+        
+        var novaHamburgueria = new Hamburgueria("Hamburgueria do JC", "Rio de Janeiro");
+        novaHamburgueria.ImportarDados();
+
+        foreach (var func in novaHamburgueria.ListarFuncionarios())
+        {
+            func.ExibirDados();
+        }
     }
 }

@@ -8,59 +8,60 @@ internal class Biblioteca
         Localizacao = localizacao;
     }
 
-    private IList<Publicacao> publicacaos = new List<Publicacao>();
+    private IList<Publicacao> _publicacoes = new List<Publicacao>();
 
     public string Nome { get; private set; }
     public string Localizacao { get; private set; }
 
     public void AdicionarPublicacao(Publicacao publicacao)
     {
-        publicacaos.Add(publicacao);
+        _publicacoes.Add(publicacao);
     }
 
-    public List<Publicacao> ListarLivros()
+    public List<Publicacao> ListarPublicacoes()
     {
-        return publicacaos.Where(p => p is Livro).ToList();
+        return _publicacoes.ToList();
     }
 
-    public List<Publicacao> ListarRevistas()
+    private string _dadosExportacao = $@"{Environment.CurrentDirectory}\dados.txt";
+
+    public void ExportarDados()
     {
-        return publicacaos.Where(p => p is Revista).ToList();
+        if (File.Exists(_dadosExportacao))
+            File.Delete(_dadosExportacao);
+
+        var dados = _publicacoes.Select(pub => pub.ToString()).ToArray();
+        File.WriteAllLines(_dadosExportacao, dados);
     }
 
-    public List<Publicacao> ListarJornais()
+    public void ImportarDados()
     {
-        return publicacaos.Where(p => p is Jornal).ToList();
-    }
-
-    private string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
-
-    public void GerarRelatorio()
-    {
-        if (File.Exists(file))
-            File.Delete(file);
-
-        using (StreamWriter sw = File.CreateText(file))
+        if (!File.Exists(_dadosExportacao))
         {
-            publicacaos.ToList().ForEach(pub => sw.WriteLine(pub.ToString()));
-        }
-    }
-
-    public void ExibirRelatorio()
-    {
-        if (!File.Exists(file))
-        {
-            Console.WriteLine("Relatório não encontrado.");
+            Console.WriteLine("Arquivo de dados não encontrado.");
             return;
         }
-        using (StreamReader sr = File.OpenText(file))
-        {
-            string s = "";
-            while ((s = sr.ReadLine()) != null)
-            {
-                Console.WriteLine(s);
-            }
-        }
+
+        var dados = File.ReadAllLines(_dadosExportacao);
+        _publicacoes = dados.Select(d => ConverteStrToPublicacao(d)).ToList();
     }
 
+    private Publicacao ConverteStrToPublicacao(string str)
+    {
+        var partes = str.Split("|");
+        var tipo = partes[0];
+        var titulo = partes[1];
+        var ano = int.Parse(partes[2]);
+        var editora = partes[3];
+
+        Publicacao publicacao = tipo switch
+        {
+            "Revista" => new Revista(titulo, ano, editora),
+            "Jornal" => new Jornal(titulo, ano, editora),
+            "Livro" => new Livro(titulo, ano, editora),
+            _ => throw new ArgumentException("Tipo de publicação inválido.")
+        };
+
+        return publicacao;
+    }
 }

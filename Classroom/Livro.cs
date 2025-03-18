@@ -2,6 +2,11 @@
 
 internal class Livro : Publicacao
 {
+    public Livro(string titulo, int ano, string editora)
+    : base(titulo, ano, editora)
+    {
+    }
+
     public Livro(string titulo, int ano, string editora, string autor, string isbn) 
         : base(titulo, ano, editora)
     {

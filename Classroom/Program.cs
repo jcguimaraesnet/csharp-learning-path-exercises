@@ -25,7 +25,14 @@ internal class Program
         biblioteca.AdicionarPublicacao(revista);
         biblioteca.AdicionarPublicacao(livro);
 
-        biblioteca.GerarRelatorio();
-        biblioteca.ExibirRelatorio();
+        biblioteca.ExportarDados();
+        
+        var novaBiblioteca = new Biblioteca("Biblioteca Nova", "Centro / RJ");
+        novaBiblioteca.ImportarDados();
+        
+        foreach (var publicacao in novaBiblioteca.ListarPublicacoes())
+        {
+            publicacao.ExibirDados();
+        }
     }
 }

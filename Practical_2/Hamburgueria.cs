@@ -26,16 +26,13 @@ public class Hamburgueria
     public IList<Funcionario> ListarCaixas()
         => _funcionarios.Where(f => f is Caixa).ToList();
 
-    public void GerarRelatorio()
+    public void ExportarDados()
     {
-        string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
-        
+        string file = $@"{Environment.CurrentDirectory}\dados.txt";
         if (File.Exists(file))
             File.Delete(file);
-        
-        using (StreamWriter sw = File.CreateText(file))
-        {
-            _funcionarios.ToList().ForEach(func => sw.WriteLine(func.ToString()));
-        }
+
+        var dados = _funcionarios.Select(func => func.ToString()).ToArray();
+        File.WriteAllLines(file, dados);
     }
 }

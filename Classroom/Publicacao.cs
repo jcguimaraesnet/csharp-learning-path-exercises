@@ -15,22 +15,23 @@ internal abstract class Publicacao
 
     public override string ToString()
     {
-        var result = "## INFORMAÇÕES BÁSICAS: #####\n";
-        result += $"Título: {Titulo}\n";
-        result += $"Ano: {Ano}\n";
-        result += $"Editora: {Editora}\n";
-        result += "## SEÇÕES: #####\n";
-        foreach (var secao in _secoes)
-        {
-            result += secao.ToString() + "\n";
-        }
-        result += "#############################\n\n";
+        var result = $"{GetType().Name}|{Titulo}|{Ano}|{Editora}";
         return result;
     }
 
     public void ExibirDados()
     {
-        Console.WriteLine(ToString());
+        Console.WriteLine("## INFORMAÇÕES BÁSICAS: #####");
+        Console.WriteLine($"Título: {Titulo}");
+        Console.WriteLine($"Ano: {Ano}");
+        Console.WriteLine($"Editora: {Editora}");
+        ExibirDadosAdicionais();
+        Console.WriteLine("## SEÇÕES: #####");
+        foreach (var secao in _secoes)
+        {
+            Console.WriteLine(secao.ToString());
+        }
+        Console.WriteLine("#############################\n");
         ExibirDadosAdicionais();
     }
 

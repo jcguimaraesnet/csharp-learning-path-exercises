@@ -17,43 +17,46 @@ public class Hamburgueria
         _funcionarios.Add(funcionario);
     }
 
-    public IList<Funcionario> ListarGarcons()
-        => _funcionarios.Where(f => f is Garcon).ToList();
+    public IList<Funcionario> ListarFuncionarios()
+        => _funcionarios.ToList();
 
-    public IList<Funcionario> ListarSupervisores()
-        => _funcionarios.Where(f => f is Supervisor).ToList();
-
-    public IList<Funcionario> ListarCaixas()
-        => _funcionarios.Where(f => f is Caixa).ToList();
-
-    private string file = $@"{Environment.CurrentDirectory}\relatorio.txt";
-
-    public void GerarRelatorio()
+    string _dados = $@"{Environment.CurrentDirectory}\dados.txt";
+    public void ExportarDados()
     {
-        if (File.Exists(file))
-            File.Delete(file);
+        
+        if (File.Exists(_dados))
+            File.Delete(_dados);
 
-        using (StreamWriter sw = File.CreateText(file))
-        {
-            _funcionarios.ToList().ForEach(func => sw.WriteLine(func.ToString()));
-        }
+        var dados = _funcionarios.Select(func => func.ToString()).ToArray();
+        File.WriteAllLines(_dados, dados);
     }
 
-    public void ExibirRelatorio()
+    public void ImportarDados()
     {
-        if (!File.Exists(file))
+        if (!File.Exists(_dados))
         {
-            Console.WriteLine("Relatório não encontrado.");
+            Console.WriteLine("Arquivo de dados não encontrado.");
             return;
         }
 
-        using (StreamReader sr = File.OpenText(file))
+        var dados = File.ReadAllLines(_dados);
+        _funcionarios = dados.Select(d => ConverteStrToFuncionario(d)).ToList();
+    }
+
+    private Funcionario ConverteStrToFuncionario(string str)
+    {
+        var partes = str.Split("|");
+        var tipo = partes[0];
+        var nome = partes[1];
+        var sobrenome = partes[2];
+        var valorHora = double.Parse(partes[3]);
+        Funcionario funcionario = tipo switch
         {
-            string s = "";
-            while ((s = sr.ReadLine()) != null)
-            {
-                Console.WriteLine(s);
-            }
-        }
+            "Garcon" => new Garcon(nome, sobrenome, valorHora),
+            "Supervisor" => new Supervisor(nome, sobrenome, valorHora),
+            "Caixa" => new Caixa(nome, sobrenome, valorHora),
+            _ => throw new ArgumentException("Tipo de funcionário inválido.")
+        };
+        return funcionario;
     }
 }

@@ -2,6 +2,11 @@
 
 internal class Jornal : Publicacao
 {
+    public Jornal(string titulo, int ano, string editora)
+        : base(titulo, ano, editora)
+    {
+    }
+
     public Jornal(string titulo, int ano, string editora, DateOnly dataEdicao, string cidade)
         : base(titulo, ano, editora)
     {

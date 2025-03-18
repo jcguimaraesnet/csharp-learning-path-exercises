@@ -2,6 +2,11 @@
 
 internal class Revista : Publicacao
 {
+    public Revista(string titulo, int ano, string editora)
+    : base(titulo, ano, editora)
+    {
+    }
+
     public Revista(string titulo, int ano, string editora, int numeroEdicao, string issn)
         : base(titulo, ano, editora)
     {

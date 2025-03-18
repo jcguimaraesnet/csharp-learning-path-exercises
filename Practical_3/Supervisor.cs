@@ -2,6 +2,11 @@
 
 internal class Supervisor : Funcionario, IDissidioElegivel
 {
+    public Supervisor(string nome, string sobrenome, double valorHora)
+        : base(nome, sobrenome, valorHora)
+    {
+    }
+
     public Supervisor(string nome, string sobrenome, double valorHora, Turno turno)
         : base(nome, sobrenome, valorHora)
     {
