@@ -1,6 +1,6 @@
 ﻿namespace Practical_3;
 
-internal class Supervisor : Funcionario, IDissidioElegivel
+public class Supervisor : Funcionario, IDissidioElegivel
 {
     public Supervisor(string nome, string sobrenome, double valorHora, Turno turno)
         : base(nome, sobrenome, valorHora)

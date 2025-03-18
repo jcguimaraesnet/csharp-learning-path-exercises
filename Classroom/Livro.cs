@@ -1,6 +1,6 @@
 ﻿namespace Classroom;
 
-internal class Livro : Publicacao, IEmprestavel
+public class Livro : Publicacao, IEmprestavel
 {
     public Livro(string titulo, int ano, string editora, string autor, string isbn) 
         : base(titulo, ano, editora)
@@ -21,7 +21,7 @@ internal class Livro : Publicacao, IEmprestavel
         Console.WriteLine("#############################");
     }
 
-    private bool _status;
+    private bool _status = true;
 
     public void Devolver()
         => _status = true;

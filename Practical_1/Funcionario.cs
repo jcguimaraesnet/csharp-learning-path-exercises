@@ -6,7 +6,7 @@ public abstract class Funcionario
     {
         Nome = nome;
         Sobrenome = sobrenome;
-        _valorHora = valorHora;
+        ValorHora = valorHora;
     }
 
     private double _valorHora;
@@ -24,7 +24,7 @@ public abstract class Funcionario
         }
     }
 
-    private string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
+    public string ObterNomeCompleto() => $"{Nome} {Sobrenome}";
 
     public void ExibirDados()
     {

@@ -1,6 +1,6 @@
 ﻿namespace Classroom;
 
-internal abstract class Publicacao
+public abstract class Publicacao
 {
     public Publicacao(string titulo, int ano, string editora)
     {
@@ -16,10 +16,11 @@ internal abstract class Publicacao
     public void ExibirDados()
     {
         Console.WriteLine("## INFORMAÇÕES BÁSICAS: #####");
-        Console.WriteLine($"Título: {Titulo}");
+        Console.WriteLine($"Título: {Titulo}"); 
         Console.WriteLine($"Ano: {Ano}");
         Console.WriteLine($"Editora: {Editora}");
         ExibirDadosAdicionais();
+        Console.WriteLine();
     }
 
     public abstract void ExibirDadosAdicionais();

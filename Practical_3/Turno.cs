@@ -1,6 +1,6 @@
 ﻿namespace Practical_3;
 
-internal enum Turno
+public enum Turno
 {
     Manha,
     Tarde,

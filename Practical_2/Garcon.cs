@@ -1,6 +1,6 @@
 ﻿namespace Practical_2;
 
-internal class Garcon : Funcionario
+public class Garcon : Funcionario
 {
     public Garcon(string nome, string sobrenome, double valorHora, List<int> mesas) 
         : base(nome, sobrenome, valorHora)
