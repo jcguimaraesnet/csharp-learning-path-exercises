@@ -4,6 +4,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("pt-BR");
+
         Console.WriteLine("Hamburgueria - Cadastro de Funcionários");
 
         Console.WriteLine("Informe o nome do funcionário:");
@@ -19,7 +21,7 @@ internal class Program
             return;
         }
 
-        Console.WriteLine("Informe a data de nascimento do funcionário:");
+        Console.WriteLine("Informe a data de nascimento do funcionário (formato DD/MM/YYYY):");
         if (!DateOnly.TryParse(Console.ReadLine(), out DateOnly dataNascimento))
         {
             Console.WriteLine("Data de nascimento inválido. Programa encerrado.");
