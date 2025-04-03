@@ -64,4 +64,13 @@ internal class Biblioteca
 
         return publicacao;
     }
+
+    public void ExibirPublicacoes(Action<string> imprimir)
+    {
+        foreach (var publicacao in _publicacoes)
+        {
+            imprimir(publicacao.ToString());
+        }
+    }
+
 }
