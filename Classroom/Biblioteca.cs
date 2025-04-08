@@ -8,6 +8,10 @@ internal class Biblioteca
         Localizacao = localizacao;
     }
 
+    public delegate void PublicacaoAdicionadaHandler(object sender, Publicacao publicacao);
+    public event PublicacaoAdicionadaHandler PublicacaoAdicionada;
+    public event EventHandler<Publicacao> PublicacaoAdicionada2;
+
     private IList<Publicacao> _publicacoes = new List<Publicacao>();
 
     public string Nome { get; private set; }
@@ -16,6 +20,8 @@ internal class Biblioteca
     public void AdicionarPublicacao(Publicacao publicacao)
     {
         _publicacoes.Add(publicacao);
+        PublicacaoAdicionada?.Invoke(this, publicacao);
+        PublicacaoAdicionada2?.Invoke(this, publicacao);
     }
 
     public List<Publicacao> ListarPublicacoes()

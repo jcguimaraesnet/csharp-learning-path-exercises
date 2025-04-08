@@ -16,6 +16,5 @@ internal class Program
         hamburgueria.AdicionarFuncionario(supervisor);
         hamburgueria.AdicionarFuncionario(caixa);
 
-        hamburgueria.GerarRelatorio();
     }
 }
